@@ -217,6 +217,14 @@ cat3.products.create!({
   price: 79.99
 })
 
+cat3.products.create!({
+  name:  'SOLDOUT',
+  description: "It's sold out.",
+  image: open_asset('plante_12.jpg'),
+  quantity: 0,
+  price: 15.55
+})
+
 
 puts "DONE!"
 
