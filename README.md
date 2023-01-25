@@ -33,4 +33,4 @@ More information in their docs: <https://stripe.com/docs/testing#cards>
 
 ##
 
-Readme Misc
+Readme Misc ABCDEG
