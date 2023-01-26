@@ -1,0 +1,11 @@
+<tr>
+  <td>
+    <%= link_to category.name, category_path(category.id) %> 
+  </td>
+  <td>
+    <%= category.products.length %>
+  </td>
+  <td>
+    <%= fa_icon "trash" %>
+  </td>
+</tr>
