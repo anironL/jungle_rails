@@ -80,7 +80,6 @@ RSpec.describe ProductSpec, type: :model do
         @test_prod.price = 100
     
       expect {@test_prod.save!}.to raise_exception("Validation failed: Name can't be blank")
-      # (@test_prod).to raise_error("Validation failed: Name can't be blank")
       # .errors.full_messages
 
     
