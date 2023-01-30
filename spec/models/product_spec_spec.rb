@@ -4,10 +4,10 @@ RSpec.describe ProductSpec, type: :model do
   # pending "add some examples to (or delete) #{__FILE__}"
 
   describe 'Validations' do
-    # before :each do
-    #   @test_cat = Category.new
-    #     @test_cat.id = 1
-    #     @test_cat.name = "test_cat" 
+    before :each do
+      @test_cat = Category.new
+        @test_cat.id = 1
+        @test_cat.name = "test_cat" 
     #   @test_prod = Product.new
     #     @test_prod.category_id = 1
     #     @test_prod.name = "test_name"
@@ -16,7 +16,9 @@ RSpec.describe ProductSpec, type: :model do
     #     @test_prod.quantity = 1
     #     @test_prod.price = 100
     #   # name, description, image, quantity, price, category
-    # end
+
+      @test_cat.save!
+    end
     
     it "Validates :name, presence:true" do
       @test_prod = Product.new
@@ -79,10 +81,9 @@ RSpec.describe ProductSpec, type: :model do
         @test_prod.quantity = 1
         @test_prod.price = 100
     
-      expect {@test_prod.save!}.to raise_exception("Validation failed: Name can't be blank")
-      # .errors.full_messages
-
-    
+      @test_prod.save
+      expect(@test_prod.errors.full_messages).to include("Name can't be blank")
+      # expect {@test_prod.save!}.to raise_exception("Validation failed: Name can't be blank")
     end
 
   end
