@@ -76,7 +76,40 @@ RSpec.describe UserSpec, type: :model do
 
       expect(@test_user2.errors.full_messages).to include("Password is too short (minimum is 5 characters)")
     end
-
-  
   end
+
+  describe '.authenticate_with_credentials' do
+    before :each do
+      @test_user1 = User.new
+        @test_user1.first_name = "test1_Fname" 
+        @test_user1.last_name = "test1_Lname" 
+        @test_user1.email = "test1@test.com" 
+        @test_user1.password = "test1_password" 
+        @test_user1.password_confirmation = "test1_password" 
+
+        @test_user1.save
+      end
+
+    # examples for this class method here
+    it 'should be successful' do
+      @test_user1 = User.authenticate_with_credentials("test1@test.com", "test1_password" )
+      
+      expect(@test_user1).to be_truthy
+    end
+
+    # What if a visitor types in a few spaces before and/or after their email address? They should still be authenticated successfully. Therefore " example@domain.com " should be successfully used to fetch by using email "example@domain.com".
+    it "Sign-in email should be case insensitive" do
+      @test_user1 = User.authenticate_with_credentials("TEST1@test.com", "test1_password" )
+      
+      expect(@test_user1.email).to include ("test1@test.com")   
+    end
+
+    # What if a visitor types in the wrong case for their email? They should still be authenticated successfully. Eg: a user with email eXample@domain.COM should be allowed login with the email EXAMPLe@DOMAIN.CoM.
+    it "Sign-in email should remove trailing and leading spaces" do
+      @test_user1 = User.authenticate_with_credentials("  test1@test.com  ", "test1_password" ) 
+
+      expect(@test_user1.email).to include ("test1@test.com") 
+    end
+  end
+
 end
