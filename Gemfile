@@ -57,6 +57,7 @@ group :development, :test do
   gem 'net-smtp', require: false
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'dotenv-rails'
+  # gem 'xvfb' installed as a WSL2 dependency
 end
 
 group :development do
@@ -77,6 +78,10 @@ group :test do
   gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
+  group :development, :test do
+  gem "cypress-rails"
+  gem 'database_cleaner-active_record'
+end
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
